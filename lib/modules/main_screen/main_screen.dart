@@ -1,6 +1,7 @@
 
 import 'package:dungeon_mafia/modules/main_screen/main.dart';
 import 'package:dungeon_mafia/modules/main_screen/rules.dart';
+import 'package:dungeon_mafia/modules/main_screen/settings.dart';
 import 'package:flutter/material.dart';
 
 
@@ -25,8 +26,8 @@ class _MainScreenState extends State<MainScreen> {
 
       body: <Widget> [
         const Rules(),
-        Main(),
-        MainScreen()
+        const Main(),
+        const Settings()
       ][currentPageIndex],
 
       bottomNavigationBar: NavigationBar(
