@@ -1,6 +1,6 @@
 
-
-
+import 'package:dungeon_mafia/modules/main_screen/main.dart';
+import 'package:dungeon_mafia/modules/main_screen/rules.dart';
 import 'package:flutter/material.dart';
 
 
@@ -12,6 +12,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  int currentPageIndex = 0;
   @override
   Widget build(BuildContext context) {
 
@@ -22,37 +23,36 @@ class _MainScreenState extends State<MainScreen> {
     // Text("text", style: thm.textTheme.titleLarge,)
     return Scaffold(
 
-      body: Container(
-        margin: EdgeInsets.only(
-          top: height * 0.1,
-          left: width * 0.1
-        ),
-        child: Column(
-          // выравнивание столбцов
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Главный экран", style: thm.textTheme.titleLarge,)
-
-          ],
-        ),
-      ),
+      body: <Widget> [
+        const Rules(),
+        Main(),
+        MainScreen()
+      ][currentPageIndex],
 
       bottomNavigationBar: NavigationBar(
-        destinations: [
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPageIndex = index;
+            print(index);
+          });
+        },
+        indicatorColor: const Color.fromRGBO(184, 224, 191, 1.0),
+        selectedIndex: currentPageIndex,
+        backgroundColor: const Color.fromRGBO(62, 178, 80, 0.5019607843137255),
+        destinations: const [
+          NavigationDestination(
+              icon: Icon(Icons.book),
+              label: "Правила"
+          ),
           NavigationDestination(
               icon: Icon(Icons.home),
-              label: "Правила"
+              label: "Главная"
           ),
           NavigationDestination(
               icon: Icon(Icons.settings),
               label: "Настройки"
           ),
-          NavigationDestination(
-              icon: Icon(Icons.info),
-              label: "О приложении"
-          ),
         ],
-
       )
     );
   }
